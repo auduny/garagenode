@@ -7,7 +7,10 @@ router.get('/', function(req, res) {
   res.send('respond with a resource');
 	gpio.open(12,'output', function(err) {
 		gpio.write(12,1, function() {
-			gpio.close(12);
+			setTimeout(function() { gpio.write(12,0, function() {
+		 		gpio.close(12)
+			})	}, 2);
+
 		});
 	});
 });
