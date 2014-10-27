@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
 		gpio.write(12,1, function() {
 			setTimeout(function() { gpio.write(12,0, function() {
 		 		gpio.close(12)
-			})	}, 2);
+			})	}, 1000);
 
 		});
 	});
