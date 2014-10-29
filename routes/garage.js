@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 
 router.get('/snapshot', function(req,res) {
 	var RaspiCam = require('raspicam');
-	var cam = new RaspiCam({ mode: "photo", output: "public/snapshot.jpg" });
+	var cam = new RaspiCam({ mode: "photo", output: "public/img/snapshot.jpg" });
 	cam.start();
 	res.send('Taking snapshot');
 });
