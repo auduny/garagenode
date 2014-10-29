@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var gpio = require('pi-gpio');
 
 /* GET users listing. */
 router.get('/', function(req, res) {
+	var gpio = require('pi-gpio');
   res.send('respond with a resource');
 	gpio.open(12,'output', function(err) {
 		gpio.write(12,1, function() {
