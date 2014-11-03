@@ -23,11 +23,14 @@
 
     <div class="container text-center">
 
-      <img id="snapshotImage" class="img-responsive center-block" src="img/snapshot.jpg?feus">
-        <h1>Garasjen</h1>
+	    <h1>Garasjen</h1>
+	    <p>
 <button type="button" id="trigger" data-loading-text="Triggering.." class="btn btn-primary btn-lg">Trigger</button>
 <button type="button" id="snapshot" data-loading-text="Snapshoting.." class="btn btn-primary btn-lg">Snapshot</button>
-
+</p>
+<p>
+<img id="snapshotImage" class="img-responsive center-block" height=800 width=600 src="img/snapshot.jpg?feus">
+</p>
     </div><!-- /.container --> 
 	  
 
@@ -39,19 +42,30 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
 <script>
- $('#snapshot').on('click', function () {
-    var btn = $(this).button('loading');
-    $.ajax({ type:"POST", url:"snapshot"}).done(function() { btn.button('reset');
-	    $('#snapshotImage').attr("src","img/snapshot.jpg?" + Date.now()) 
-    });
-  })
- $('#trigger').on('click', function () {
-    var btn = $(this).button('loading');
-    $.ajax({ type:"POST", url:"trigger"}).done(function() { btn.button('reset'); });
-  })
+	$('#snapshot').on('click', function () {
+		var btn = $(this).button('loading');
+		snapshot(function () {
+			updateImage();
+			btn.button('reset');
 
+		})
+	})
+	$('#trigger').on('click', function () {
+		var btn = $(this).button('loading');
+		var count = 0;
+		function interval() { var intervalID = setInterval(function () { if (count > 7) { clearInterval(intervalID) } else { snapshot(updateImage); count++; console.log(count)}},3000); }
+		$.ajax({ type:"POST", url:"trigger"}).done(function() { btn.button('reset'); interval()}); 
+	})
 
+	function snapshot(callback) {
+		$.ajax({ type:"POST", url:"snapshot"}).done(callback);
+	}
+
+	function updateImage() {
+		$('#snapshotImage').fadeOut().attr("src","img/snapshot.jpg?" + new Date().getTime()).fadeIn();
+	}
+
+	$( document ).ready(function() { snapshot(updateImage) });
 </script>  
-
 </body>
 </html>
