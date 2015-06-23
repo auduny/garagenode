@@ -29,7 +29,7 @@ router.post('/snapshot', function(req,res) {
 	var exec = require('child_process').exec;
 	function ret(error,stdout,stderr) { res.send("Returning" + error + stdout + stderr) }
 	//exec('vgrabbj -d /dev/video0 -f public/img/snapshot.jpg -U -R', ret);
-	exec('raspistill -t 1500 -w 800 -h 600 -o public/img/snapshot.jpg -hf -vf', ret);
+	exec('raspistill -t 1500 -w 800 -h 600 -o public/img/snapshot.jpg -rot 90', ret);
 })
 
 router.post('/trigger', function(req, res) {
