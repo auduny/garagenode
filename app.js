@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(basicAuth(config.username, config.password));
 app.use(logger('dev'));
-pp.use(cookieParser());
+app.use(cookieParser());
 app.use(compression());
 app.use('/garage/', express.static(path.join(__dirname, 'public')));
 
