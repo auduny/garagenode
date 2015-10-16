@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-//
+var state = "closed";
+
 // Foobar
 router.get('/',  function(req, res) {
   res.render('garage', { title: 'Garage' });
@@ -31,6 +32,14 @@ router.post('/snapshot',  function(req,res) {
 	//exec('vgrabbj -d /dev/video0 -f public/img/snapshot.jpg -U -R', ret);
 	exec('raspistill -t 1500 -w 800 -h 600 -o public/img/snapshot.jpg -rot 180', ret);
 })
+router.post('/state',  function(req,res) {
+	state = req.body.state;
+})
+
+router.get('/state',  function(req,res) {
+	res.send(state);
+})
+
 
 
 router.post('/trigger',  function(req, res) {
