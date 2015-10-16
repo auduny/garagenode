@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var garagestate = "closed"
 //
 // Foobar
 router.get('/', function(req, res) {
@@ -44,6 +45,16 @@ router.post('/trigger', function(req, res) {
 		});
 	});
 });
+
+router.post('/state', function(req, res) {
+  res.send('Updating state');
+	garagestate = req.body.garagestate
+});
+router.get('/state', function(req, res) {
+  res.send(garagestate);
+});
+
+
 
 
 module.exports = router;
