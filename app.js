@@ -8,12 +8,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var compression = require('compression');
 var basicAuth = require('basic-auth-connect');
+var garage = require('./routes/garage');
 
 var app = express();
 
 // view engine setup
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({type: "*/*"}));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -24,7 +25,6 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(compression());
 
-var garage = require('./routes/garage');
 app.use('/garage/', express.static(path.join(__dirname, 'public')));
 
 app.use('/garage', garage);
