@@ -27,7 +27,7 @@
 <button type="button" id="snapshot" data-loading-text="Snapshoting.." class="btn btn-primary btn-lg">Snapshot</button>
 </p>
 <p>
-<img id="snapshotImage" class="img-responsive center-block" height=800 width=600 src="img/snapshot.jpg?feus">
+<img alt="bilde" id="snapshotImage" class="img-responsive center-block" height=800 width=600 src="img/snapshot.jpg?feus">
 </p>
     </div><!-- /.container --> 
 	  
@@ -40,30 +40,60 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
 <script>
-	$('#snapshot').on('click', function () {
-		var btn = $(this).button('loading');
-		snapshot(function () {
-			updateImage();
-			btn.button('reset');
+	$( document ).ready(function() { 
+		$(function() {
+			$('#snapshot').on('click', function () {
+				var btn = $(this).button('loading');
+				snapshot(function () {
+					updateImage();
+					btn.button('reset');
+				});
+			});
+			$('#trigger').on('click', function () {
+				var btn = $(this);
+				btn.button('loading');
+				btn.prop('disabled', true);
+				var count = 0;
+				var fetchImage = function() {
+					if (count > 7) {
+						btn.button('reset'); 
+						btn.prop('disabled', false);
+						return;
+					}
+					count += 1;
+					var updateAfterSnapshot = updateImage.bind(this, function() {
+						// todo: trigger + image load + animation + 3000 * 7 = too long?
+						setTimeout(fetchImage, 3000);
+					});
+					snapshot(updateAfterSnapshot); 
+				};
+				$.ajax({ type:'POST', url:'trigger' }).done(function() { 
+					fetchImage();
+				}); 
+			});
+			function snapshot(callback) {
+				$.ajax({ type:'POST', url:'snapshot' }).done(callback);
+			}
+			function updateImage(cb) {
+				var img = $('#snapshotImage');
+				img.fadeOut(function() {
+					img.attr('src', 'img/snapshot.jpg?' + new Date().getTime());
+					// fixme, audun: handle image load error
+					img.one('load', function() {
+						img.fadeIn(cb);
+					}).each(function() {
+						if(this.complete) $(this).load();
+					});
+				});	
+			}
+			snapshot(updateImage);
+		});
+	});
 
-		})
-	})
-	$('#trigger').on('click', function () {
-		var btn = $(this).button('loading');
-		var count = 0;
-		function interval() { var intervalID = setInterval(function () { if (count > 7) { clearInterval(intervalID) } else { snapshot(updateImage); count++; console.log(count)}},3000); }
-		$.ajax({ type:"POST", url:"trigger"}).done(function() { btn.button('reset'); interval()}); 
-	})
-
-	function snapshot(callback) {
-		$.ajax({ type:"POST", url:"snapshot"}).done(callback);
-	}
-
-	function updateImage() {
-		$('#snapshotImage').fadeOut().attr("src","img/snapshot.jpg?" + new Date().getTime()).fadeIn();
-	}
-
-	$( document ).ready(function() { snapshot(updateImage) });
+	
+		
+		
+		
 </script>
 </body>
 </html>
