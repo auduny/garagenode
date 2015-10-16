@@ -23,6 +23,8 @@ app.use(basicAuth(config.username, config.password));
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(compression());
+
+var garage = require('./routes/garage');
 app.use('/garage/', express.static(path.join(__dirname, 'public')));
 
 app.use('/garage', garage);
@@ -58,6 +60,5 @@ app.use(function(err, req, res, next) {
     });
 });
 
-var garage = require('./routes/garage');
 
 module.exports = app;
