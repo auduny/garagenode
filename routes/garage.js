@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 //
 // Foobar
-router.get('/', auth, function(req, res) {
+router.get('/',  function(req, res) {
   res.render('garage', { title: 'Garage' });
 	});
 
@@ -25,7 +25,7 @@ router.get('/snapshotold', function(req,res) {
 
 });
 
-router.post('/snapshot', auth, function(req,res) {
+router.post('/snapshot',  function(req,res) {
 	var exec = require('child_process').exec;
 	function ret(error,stdout,stderr) { res.send("Returning" + error + stdout + stderr) }
 	//exec('vgrabbj -d /dev/video0 -f public/img/snapshot.jpg -U -R', ret);
@@ -33,7 +33,7 @@ router.post('/snapshot', auth, function(req,res) {
 })
 
 
-router.post('/trigger', auth, function(req, res) {
+router.post('/trigger',  function(req, res) {
   res.send('Garage is clicking');
 	var gpio = require('pi-gpio');
 	gpio.open(12,'output', function(err) {
