@@ -34,10 +34,11 @@ router.post('/snapshot',  function(req,res) {
 })
 router.post('/state',  function(req,res) {
 	state = req.body.state;
+  res.send("New state is: " + state);
 })
 
 router.get('/state',  function(req,res) {
-	res.send(state);
+	res.send("State is: "+ state);
 })
 
 
