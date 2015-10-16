@@ -33,6 +33,7 @@ router.post('/snapshot',  function(req,res) {
 	exec('raspistill -t 1500 -w 800 -h 600 -o public/img/snapshot.jpg -rot 180', ret);
 })
 router.post('/state',  function(req,res) {
+  console.log(req.body);
 	state = req.body.state;
   res.send("New state is: " + state);
 })
