@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
 router.get('/snapshotold', function(req,res) {
 	var RaspiCam = require('raspicam');
 //	var cam = new RaspiCam({ mode: "photo", output: "public/img/snapshot.jpg", vf:true, hf:true });
-	var cam = new RaspiCam({ mode: "photo", output: "public/img/snapshot.jpg", rot: 90 });
+	var cam = new RaspiCam({ mode: "photo", output: "public/img/snapshot.jpg" });
 	cam.on("read", function(err, filename) {
 		console.log("This happend");
 		//res.send('Snapshot saved at foo ' + filename)
@@ -29,8 +29,9 @@ router.post('/snapshot', function(req,res) {
 	var exec = require('child_process').exec;
 	function ret(error,stdout,stderr) { res.send("Returning" + error + stdout + stderr) }
 	//exec('vgrabbj -d /dev/video0 -f public/img/snapshot.jpg -U -R', ret);
-	exec('raspistill -t 1500 -w 800 -h 600 -o public/img/snapshot.jpg -rot 90', ret);
+	exec('raspistill -t 1500 -w 800 -h 600 -o public/img/snapshot.jpg -rot 180', ret);
 })
+
 
 router.post('/trigger', function(req, res) {
   res.send('Garage is clicking');
