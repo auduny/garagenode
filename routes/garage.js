@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var garagestate = "closed"
 //
 // Foobar
-router.get('/', function(req, res) {
+router.get('/', auth, function(req, res) {
   res.render('garage', { title: 'Garage' });
 	});
 
@@ -26,7 +25,7 @@ router.get('/snapshotold', function(req,res) {
 
 });
 
-router.post('/snapshot', function(req,res) {
+router.post('/snapshot', auth, function(req,res) {
 	var exec = require('child_process').exec;
 	function ret(error,stdout,stderr) { res.send("Returning" + error + stdout + stderr) }
 	//exec('vgrabbj -d /dev/video0 -f public/img/snapshot.jpg -U -R', ret);
@@ -34,7 +33,7 @@ router.post('/snapshot', function(req,res) {
 })
 
 
-router.post('/trigger', function(req, res) {
+router.post('/trigger', auth, function(req, res) {
   res.send('Garage is clicking');
 	var gpio = require('pi-gpio');
 	gpio.open(12,'output', function(err) {
@@ -45,16 +44,6 @@ router.post('/trigger', function(req, res) {
 		});
 	});
 });
-
-router.post('/state', function(req, res) {
-  res.send('Updating state');
-	garagestate = req.body.garagestate
-});
-router.get('/state', function(req, res) {
-  res.send(garagestate);
-});
-
-
 
 
 module.exports = router;
