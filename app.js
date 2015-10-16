@@ -9,20 +9,19 @@ var bodyParser = require('body-parser');
 var compression = require('compression');
 var basicAuth = require('basic-auth-connect');
 
-var garage = require('./routes/garage');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+aapp.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(basicAuth(config.username, config.password));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+pp.use(cookieParser());
 app.use(compression());
 app.use('/garage/', express.static(path.join(__dirname, 'public')));
 
@@ -59,5 +58,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
+var garage = require('./routes/garage');
 
 module.exports = app;
