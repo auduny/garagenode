@@ -17,6 +17,9 @@
 		"ejs": "*",
 		"pi-gpio": "*",
 		"raspicam": "*",
-		"passport-local": "*"
+		"passport-local": "*",
+		"johnny-five": "*",
+		"raspi-io": "*"
+
 	}
 }

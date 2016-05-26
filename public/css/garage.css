@@ -1,0 +1,12 @@
+body {
+	background-color: #1d1f21;
+	color: #c5c8c6;
+	font-family: Ubuntu, sans-serif; 
+	text-shadow: 2px 2px #000000;
+}
+
+#page-wrap {
+	width: 800px;
+	margin: 0 auto;
+}
+

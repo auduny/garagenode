@@ -1,11 +1,25 @@
 var express = require('express');
 var router = express.Router();
-var state = "closed";
+var state = {state: "unknown", lastUpdated: "unknown" };
 
-// Foobar
+// Page
 router.get('/',  function(req, res) {
   res.render('garage', { title: 'Garage' });
 	});
+
+// API
+
+
+router.all('/api/v1/state:format?', function(req,res) {
+	res.setHeader('Cache-Control', 'private, max-age=0');
+	if (req.params.format == '.json') {
+		res.send(JSON.stringify(state));
+	} else {
+		res.send(state.state);
+	}
+});
+
+
 
 router.get('/snapshotold', function(req,res) {
 	var RaspiCam = require('raspicam');
