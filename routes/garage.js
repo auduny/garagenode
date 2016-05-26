@@ -19,44 +19,23 @@ router.all('/api/v1/state:format?', function(req,res) {
 	}
 });
 
-
-
-router.get('/snapshotold', function(req,res) {
-	var RaspiCam = require('raspicam');
-//	var cam = new RaspiCam({ mode: "photo", output: "public/img/snapshot.jpg", vf:true, hf:true });
-	var cam = new RaspiCam({ mode: "photo", output: "public/img/snapshot.jpg" });
-	cam.on("read", function(err, filename) {
-		console.log("This happend");
-		//res.send('Snapshot saved at foo ' + filename)
+router.all('/api/v1/snapshot:format?', function(req,res) {
+	res.setHeader('Cache-Control', 'private, max-age=0');
+	var exec = require('child_process').exec;
+	exec('raspistill -t 1500 -w 800 -h 600 -o public/img/snapshot.jpg -rot 180', function (error,stdout,stderr) {
+		if (error) {
+			res.send("I has issues");
+		} else {
+			res.sendfile("public/img/snapshot.jpg");
+		}
 	});
-	cam.on("exit", function(timestamp) {
-		console.log("that happend");
-		res.send('Snapshot saved ' + timestamp)
-	});
-	cam.on("start", function() {
-		console.log("whaddafuck");
-	});
-	cam.start();
-
 });
 
-router.post('/snapshot',  function(req,res) {
-	var exec = require('child_process').exec;
-	function ret(error,stdout,stderr) { res.send("Returning" + error + stdout + stderr) }
-	//exec('vgrabbj -d /dev/video0 -f public/img/snapshot.jpg -U -R', ret);
-	exec('raspistill -t 1500 -w 800 -h 600 -o public/img/snapshot.jpg -rot 180', ret);
-})
 router.post('/state', function(req,res) {
   console.log(req.body);
 	state = req.body.state;
   res.send("New state is: " + state);
 })
-
-router.get('/state',  function(req,res) {
-	res.send("State is: "+ state);
-})
-
-
 
 router.post('/trigger',  function(req, res) {
   res.send('Garage is clicking');
@@ -66,6 +45,20 @@ router.post('/trigger',  function(req, res) {
 			setTimeout(function() { gpio.write(12,0, function() {
 		 		gpio.close(12)
 			})	}, 1000);
+		});
+	});
+});
+
+router.all('/api/v1/trigger',  function(req, res) {
+	var gpio = require('pi-gpio');
+	gpio.open(12,'output', function(err) {
+		gpio.write(12,1, function(err) {
+			if(!err) {
+				setTimeout(function() { gpio.write(12,0, function() {
+					gpio.close(12);
+					res.send('Garage is clicking');
+				})	}, 1000);
+			}
 		});
 	});
 });
