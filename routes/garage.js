@@ -25,7 +25,6 @@ router.all('/api/v1/state:format?', function(req,res) {
 	console.log(req.body);
 	res.setHeader('Cache-Control', 'private, max-age=0');
 	if (req.method == "POST") {
-		consle.log(req.method + " is used");
 		state.state = req.body.state;
 		state.lastUpdated = Date.now();
 
