@@ -37,7 +37,7 @@ router.all('/api/v1/state:format?', function(req,res) {
 	}
 });
 
-router.all('/api/v0/snapshot:format?', function(req,res) {
+router.all('/api/v1/snapshot:format?', function(req,res) {
 	res.setHeader('Cache-Control', 'private, max-age=0');
 	var exec = require('child_process').exec;
 	exec('raspistill -t 1000 -w 800 -h 600 -o public/img/snapshot.jpg -rot 180', function (error,stdout,stderr) {
