@@ -18,8 +18,8 @@
 		"pi-gpio": "*",
 		"raspicam": "*",
 		"passport-local": "*",
-		"johnny-five": "*",
-		"raspi-io": "*"
+		"request": "*"
+
 
 	}
 }

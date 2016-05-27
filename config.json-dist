@@ -2,4 +2,5 @@
 	"username": "user",
 	"password": "xxxx",
 	"port": 3000
+	"basepath": "http://localhost:3000/garage"
 }
