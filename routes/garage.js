@@ -32,7 +32,7 @@ router.all('/api/v1/state:format?', function(req,res) {
 	if (req.params.format == '.json') {
 		res.send(JSON.stringify(state));
 	} else {
-		res.send("state.state");
+		res.send(state.state);
 	}
 });
 
