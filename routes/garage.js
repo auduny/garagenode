@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var state = {state: "-", lastUpdated: "-" };
+var state = {state: "unknown", timestamp: 0 };
 var request = require('request');
 var config = require('../config.json');
 var auth = "Basic " + new Buffer(config.username + ":" + config.password).toString("base64");
+var moment = require('moment');
+
 
 // Page
 router.post('/',  function(req, res) {
@@ -18,19 +20,20 @@ router.all('/',  function(req, res) {
 });
 
 
-// API
-
-
 router.all('/api/v1/state:format?', function(req,res) {
 	console.log(req.body);
 	res.setHeader('Cache-Control', 'private, max-age=0');
 	if (req.method == "POST") {
+		console.log(req.body);
 		state.state = req.body.state;
-		state.lastUpdated = Date.now();
-
+		state.timestamp = Date.now();
 	}
+	state.updated = moment(state.timestamp).format();
+	state.updatedsince = moment(state.timestamp).fromNow();
+
 	if (req.params.format == '.json') {
-		res.send(JSON.stringify(state));
+		res.setHeader('Content-Type', 'application/json');
+		res.send(JSON.stringify(state, null, 3));
 	} else {
 		res.send(state.state);
 	}
@@ -41,22 +44,10 @@ router.all('/api/v1/snapshot:format?', function(req,res) {
 	var exec = require('child_process').exec;
 	exec('raspistill -t 500 -w 800 -h 600 -o public/img/snapshot.jpg -rot 180', function (error,stdout,stderr) {
 		if (error) {
-			res.sendfile("public/img/404.jpg");
+			res.sendFile("public/img/404.jpg");
 		} else {
-			res.sendfile("public/img/snapshot.jpg");
+			res.sendFile("public/img/snapshot.jpg");
 		}
-	});
-});
-
-router.post('/trigger',  function(req, res) {
-	res.send('Garage is clicking');
-	var gpio = require('pi-gpio');
-	gpio.open(12,'output', function(err) {
-		gpio.write(12,1, function(err) {
-			setTimeout(function() { gpio.write(12,0, function() {
-				gpio.close(12)
-			})	}, 1000);
-		});
 	});
 });
 
