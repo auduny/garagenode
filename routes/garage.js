@@ -44,9 +44,9 @@ router.all('/api/v1/snapshot:format?', function(req,res) {
 	var exec = require('child_process').exec;
 	exec('raspistill -t 500 -w 800 -h 600 -o public/img/snapshot.jpg -rot 180', function (error,stdout,stderr) {
 		if (error) {
-			res.sendFile("public/img/404.jpg");
+			res.sendfile("public/img/404.jpg");
 		} else {
-			res.sendFile("public/img/snapshot.jpg");
+			res.sendfile("public/img/snapshot.jpg");
 		}
 	});
 });
