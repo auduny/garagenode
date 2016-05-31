@@ -18,7 +18,6 @@ router.post('/',  function(req, res) {
 
 router.all('/',  function(req, res) {
 	res.setHeader('Cache-Control', 'private, max-age=0');
-	res.setHeader('Cache-Control', 'private, max-age=0');
 	res.render('garage', { title: 'Garage', state: state });
 });
 
