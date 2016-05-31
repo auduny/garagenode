@@ -9,6 +9,7 @@ var moment = require('moment');
 
 // Page
 router.post('/',  function(req, res) {
+	res.setHeader('Cache-Control', 'private, max-age=0');
 	request.post({url: config.basepath + '/api/v1/trigger', headers: { "Authorization": auth}}, function (err,resp,body) {
 		console.log(err, resp);
 		res.render('garage', { title: 'Garage', state: state });
