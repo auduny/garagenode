@@ -13,12 +13,14 @@ router.post('/',  function(req, res) {
 	request.post({url: config.basepath + '/api/v1/trigger', headers: { "Authorization": auth}}, function (err,resp,body) {
 		console.log(err, resp);
     state.updatedsince = moment(state.timestamp).fromNow();
+    console.log(state);
 		res.render('garage', { title: 'Garage', state: state });
 	});
 });
 
 router.all('/',  function(req, res) {
 	res.set('Cache-Control', 'private, max-age=0');
+  state.updatedsince = moment(state.timestamp).fromNow();
 	res.render('garage', { title: 'Garage', state: state });
 });
 
