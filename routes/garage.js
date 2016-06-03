@@ -56,12 +56,13 @@ router.all('/api/v1/snapshot:format?', function(req,res) {
 
 router.post('/api/v1/trigger:format?',  function(req, res) {
 	var gpio = require('pi-gpio');
+	 res.setHeader('Content-Type', 'application/json');
 	gpio.open(12,'output', function(err) {
 		gpio.write(12,1, function(err) {
 			if(!err) {
 				setTimeout(function() { gpio.write(12,0, function() {
 					gpio.close(12);
-					res.send('Garage is clicking');
+					res.send(JSON.stringify(state, null, 3));
 				})	}, 1000);
 			}
 		});
