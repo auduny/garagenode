@@ -18,7 +18,8 @@
 		"pi-gpio": "*",
 		"raspicam": "*",
 		"passport-local": "*",
-		"request": "*"
+		"request": "*",
+    "moment": "*"
 
 
 	}
