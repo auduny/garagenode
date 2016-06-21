@@ -19,8 +19,7 @@
 		"raspicam": "*",
 		"passport-local": "*",
 		"request": "*",
-    "moment": "*"
-
-
+	    "moment": "*",
+	    "modern-syslog": "*"
 	}
 }
