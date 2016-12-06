@@ -61,8 +61,8 @@ router.all('/api/v1/snapshot:format?', function (req, res) {
             } else {
                 res.sendfile("public/img/snapshot.jpg");
             }
+            cameralock=0;
         });
-        cameralock=0;
     }
 });
 
