@@ -34,7 +34,6 @@ router.all('/api/v1/state:format?', function (req, res) {
     if (req.method == "POST") {
         state.state = req.body.state;
         state.timestamp = Date.now();
-        syslog.note("Sensor says: " + state.state)
     }
     state.updated = moment(state.timestamp).format();
     state.updatedsince = moment(state.timestamp).fromNow();
@@ -68,7 +67,6 @@ router.all('/api/v1/snapshot:format?', function (req, res) {
 router.post('/api/v1/trigger:format?', function (req, res) {
     var gpio = require('pi-gpio');
     res.setHeader('Content-Type', 'application/json');
-    syslog.warn("Garagedoor is triggered");
     gpio.open(12, 'output', function (err) {
         gpio.write(12, 1, function (err) {
             if (!err) {
@@ -76,7 +74,7 @@ router.post('/api/v1/trigger:format?', function (req, res) {
                     gpio.write(12, 0, function () {
                         gpio.close(12);
                         res.send(JSON.stringify(state, null, 3));
-                    })
+                    });
                 }, 1000);
             }
         });
