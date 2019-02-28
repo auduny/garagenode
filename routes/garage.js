@@ -55,7 +55,7 @@ router.all('/api/v1/snapshot:format?', function (req, res) {
     } else {
         cameralock=1;
         var exec = require('child_process').exec;
-        exec('raspistill -t 500 -w 800 -h 600 -o public/img/snapshot.jpg -rot 180', function (error, stdout, stderr) {
+        exec('raspistill -t 500 -w 800 -h 600 -o /tmp/snapshot.jpg -rot 180', function (error, stdout, stderr) {
             if (error) {
                 res.sendfile("public/img/404.jpg");
             } else {

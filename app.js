@@ -1,4 +1,5 @@
 //
+const promBundle = require("express-prom-bundle");
 var config = require('./config.json');
 var express = require('express');
 var path = require('path');
@@ -11,6 +12,9 @@ var basicAuth = require('basic-auth-connect');
 var garage = require('./routes/garage');
 
 var app = express();
+const metricsMiddleware = promBundle({includeMethod: true});
+
+app.use(metricsMiddleware);
 
 // view engine setup
 //app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,7 +25,7 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(basicAuth(config.username, config.password));
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(cookieParser());
 app.use(compression());
 
