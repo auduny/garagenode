@@ -1,27 +1,41 @@
 {
   "name": "garagenode",
-  "version": "0.0.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Controll Garage",
+  "main": "bin/www",
+  "dependencies": {
+    "basic-auth-connect": "^1.0.0",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "cookie-parser": "^1.4.4",
+    "debug": "^4.1.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-prom-bundle": "^5.0.2",
+    "finalhandler": "^1.1.1",
+    "merge-descriptors": "^1.0.1",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "passport-local": "^1.0.0",
+    "pi-gpio": "0.0.8",
+    "prom-client": "^11.2.1",
+    "raspicam": "^0.2.14",
+    "request": "^2.88.0",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {},
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www"
   },
-  "dependencies": {
-    "basic-auth-connect": "*",
-    "body-parser": "*",
-    "compression": "*",
-    "cookie-parser": "*",
-    "debug": "*",
-    "ejs": "*",
-    "express": "*",
-    "finalhandler": "^1.0.6",
-    "merge-descriptors": "^1.0.1",
-    "modern-syslog": "*",
-    "moment": "*",
-    "morgan": "*",
-    "passport-local": "*",
-    "pi-gpio": "*",
-    "raspicam": "*",
-    "request": "*",
-    "serve-favicon": "*"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/auduny/garagenode.git"
+  },
+  "author": "Audun Ytterdal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/auduny/garagenode/issues"
+  },
+  "homepage": "https://github.com/auduny/garagenode#readme"
 }

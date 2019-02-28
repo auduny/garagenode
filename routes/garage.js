@@ -5,7 +5,6 @@ var request = require('request');
 var config = require('../config.json');
 var auth = "Basic " + new Buffer(config.username + ":" + config.password).toString("base64");
 var moment = require('moment');
-var syslog = require('modern-syslog');
 var cameralock = 0;
 
 // Page
