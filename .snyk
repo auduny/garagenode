@@ -6,3 +6,15 @@ patch:
   SNYK-JS-LODASH-450202:
     - raspicam > lodash:
         patched: '2019-08-28T10:43:15.771Z'
+    - raspicam > lodash:
+        patched: '2019-09-19T07:59:19.668Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-09-19T07:59:19.668Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-09-19T07:59:19.668Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-09-19T07:59:19.668Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-09-19T07:59:19.668Z'
+    - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
+        patched: '2019-09-19T07:59:19.668Z'
