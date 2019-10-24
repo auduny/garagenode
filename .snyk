@@ -18,6 +18,26 @@ patch:
         patched: '2019-09-19T07:59:19.668Z'
     - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
         patched: '2019-09-19T07:59:19.668Z'
+    - raspicam > lodash:
+        patched: '2019-10-23T11:43:06.867Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-10-23T11:43:06.867Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-10-23T11:43:06.867Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-10-23T11:43:06.867Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-10-23T11:43:06.867Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > lodash:
+        patched: '2019-10-23T11:43:06.867Z'
+    - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
+        patched: '2019-10-23T11:43:06.867Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-10-23T11:43:06.867Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > lodash:
+        patched: '2019-10-23T11:43:06.867Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-10-23T11:43:06.867Z'
   SNYK-JS-HTTPSPROXYAGENT-469131:
     - snyk > proxy-agent > https-proxy-agent:
         patched: '2019-10-17T07:51:36.641Z'
