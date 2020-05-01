@@ -21,7 +21,8 @@
     "prom-client": "^11.5.3",
     "raspicam": "^0.2.14",
     "request": "^2.88.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {},
   "scripts": {
