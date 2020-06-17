@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.5
+version: v1.15.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -43,3 +43,6 @@ patch:
         patched: '2019-10-17T07:51:36.641Z'
     - snyk > proxy-agent > pac-proxy-agent > https-proxy-agent:
         patched: '2019-10-17T07:51:36.641Z'
+  SNYK-JS-LODASH-567746:
+    - raspicam > lodash:
+        patched: '2020-06-17T10:59:05.378Z'
