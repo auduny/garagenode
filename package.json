@@ -22,9 +22,8 @@
     "raspicam": "^0.2.14",
     "request": "^2.88.0",
     "serve-favicon": "^2.5.0",
-    "snyk": "^1.385.0"
+    "snyk": "^1.685.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
