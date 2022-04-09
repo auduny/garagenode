@@ -14,7 +14,7 @@
     "express-prom-bundle": "^5.1.5",
     "finalhandler": "^1.1.2",
     "merge-descriptors": "^1.0.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "morgan": "^1.9.1",
     "passport-local": "^1.0.0",
     "pi-gpio": "0.0.8",
